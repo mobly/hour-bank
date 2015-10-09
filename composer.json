@@ -1,6 +1,6 @@
 {
     "name": "mobly/hour-bank",
-    "description": "Parse hour bank e-mail and post on slack to a development team",
+    "description": "Parses hour bank e-mail and post on slack to a development team",
     "type": "project",
     "require": {
         "php": ">=5.4.0",
@@ -12,7 +12,7 @@
     "authors": [
         {
             "name": "Caio Costa",
-            "email": "bitbucket@bycosta.com"
+            "email": "github@bycosta.com"
         }
     ],
     "minimum-stability": "dev"

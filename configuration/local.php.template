@@ -9,11 +9,11 @@ return [
      * Ex: ['Caio Costa', 'Daniel Costa']
      */
     'team' => function() {
-        $configuration = include('/Users/caio/Company/Mobly/Project/mobly/tools/dev/config');
+        $configuration = include('/path/to/project/global/config');
 
         return $configuration['team'];
     },
-    
+
     /**
      * Slack channel to post the hour bank from the members of the team
      */
@@ -21,6 +21,21 @@ return [
 
     /**
      * Slack Incoming WebHook URL
+     *
+     * @see https://[your team].slack.com/services/new/incoming-webhook
      */
     'slackEndpoint' => 'https://hooks.slack.com/services/qwe/asd/zxc',
+
+    /**
+     * Google Gmail Api filter for user messages list
+     */
+    'filterList' => [
+        'maxResults' => 1,
+        'q' => implode(' ', [
+            'from:email@domain.com',
+            'bcc:me',
+            'has:attachment',
+        ]),
+        'fields' => 'messages/id',
+    ],
 ];
