@@ -1,0 +1,26 @@
+<?php
+
+return [
+    /**
+     * List of team member's name.
+     *
+     * !!! It must be a closure returning an array!
+     *
+     * Ex: ['Caio Costa', 'Daniel Costa']
+     */
+    'team' => function() {
+        $configuration = include('/Users/caio/Company/Mobly/Project/mobly/tools/dev/config');
+
+        return $configuration['team'];
+    },
+    
+    /**
+     * Slack channel to post the hour bank from the members of the team
+     */
+    'channel' => '#general',
+
+    /**
+     * Slack Incoming WebHook URL
+     */
+    'slackEndpoint' => 'https://hooks.slack.com/services/qwe/asd/zxc',
+];
