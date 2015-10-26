@@ -1,5 +1,7 @@
 <?php
 
+$local = require_once('/Users/caio/Company/Mobly/Project/mobly/tools/dev/configuration/local.php');
+
 return [
     /**
      * List of team member's name.
@@ -8,34 +10,38 @@ return [
      *
      * Ex: ['Caio Costa', 'Daniel Costa']
      */
-    'team' => function() {
-        $configuration = include('/path/to/project/global/config');
-
-        return $configuration['team'];
-    },
+    'team' => $local['team'],
 
     /**
      * Slack channel to post the hour bank from the members of the team
+     *
+     * Ex.: '#general'
      */
-    'channel' => '#general',
+    'channel' => $local['slack']['teamChannel'],
 
     /**
      * Slack Incoming WebHook URL
      *
+     * Ex.: 'https://hooks.slack.com/services/qwe/asd/zxc'
+     *
      * @see https://[your team].slack.com/services/new/incoming-webhook
      */
-    'slackEndpoint' => 'https://hooks.slack.com/services/qwe/asd/zxc',
+    'slackEndpoint' => $local['slack']['endpoint'],
 
     /**
      * Google Gmail Api filter for user messages list
      */
     'filterList' => [
-        'maxResults' => 1,
-        'q' => implode(' ', [
-            'from:email@domain.com',
-            'bcc:me',
-            'has:attachment',
-        ]),
-        'fields' => 'messages/id',
+        'from' => 'from:email@domain.com',
     ],
+
+    /**
+     * Move message to trash after processing it
+     */
+    //'removeMessage' => true,
+
+    /**
+     * Mark message as done after processing it (removes from inbox)
+     */
+    //'markAsDone' => true,
 ];

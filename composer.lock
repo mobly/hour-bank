@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "77167cee192f1bc0c18962f1926bdded",
-    "content-hash": "05977b5b21cf3e16d1f6872a001ff032",
+    "hash": "5b17ec84474deca42c932ec0ec4b77f7",
+    "content-hash": "b0a9dc6e0d2a965ab41daa039bc7f62e",
     "packages": [
         {
             "name": "box/spout",
@@ -367,6 +367,45 @@
                 "slack"
             ],
             "time": "2015-06-03 03:35:16"
+        },
+        {
+            "name": "mobly/simple-helpers",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mobly/simple-helpers.git",
+                "reference": "4ef851e3d00af443cf620d8663ded89d9ab2e0ca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mobly/simple-helpers/zipball/4ef851e3d00af443cf620d8663ded89d9ab2e0ca",
+                "reference": "4ef851e3d00af443cf620d8663ded89d9ab2e0ca",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "ext-curl": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SimpleHelpers\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Caio Costa",
+                    "email": "github@bycosta.com"
+                }
+            ],
+            "description": "Set of helpers",
+            "time": "2015-10-26 22:35:08"
         },
         {
             "name": "react/promise",

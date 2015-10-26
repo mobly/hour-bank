@@ -5,6 +5,9 @@ use Box\Spout\Common\Type;
 use Box\Spout\Reader\XLSX\Sheet;
 use Maknz\Slack\Message;
 use Maknz\Slack\Client;
+use SimpleHelpers\ArrayHelper;
+use SimpleHelpers\Cli;
+use SimpleHelpers\String;
 
 $basePath = realpath(dirname(__FILE__) . '/../');
 
@@ -15,28 +18,10 @@ if (!file_exists($localConfigurationFile)) {
     exit('Please copy the local.php.template to local.php and configure with your data');
 }
 
-$configuration = array_merge(
-    include($basePath . '/configuration/application.php'),
-    include($localConfigurationFile)
-);
-
-/**
- * @see http://stackoverflow.com/questions/25193429/cant-open-downloaded-attachments-from-gmail-api
- *
- * @param string$content
- *
- * @return string
- */
-function specialDecode($content)
-{
-    return base64_decode(
-        str_replace(
-            ['-', '_'],
-            ['+', '/'],
-            $content
-        )
-    );
-}
+$configuration = ArrayHelper::configuration([
+    $basePath . '/configuration/application.php',
+    $localConfigurationFile,
+]);
 
 $client = new Google_Client();
 $client->setApplicationName($configuration['name']);
@@ -75,6 +60,11 @@ $client->setAccessToken($accessToken);
 
 // Refresh the token if it's expired.
 if ($client->isAccessTokenExpired()) {
+    Cli::writeOutput(
+        'Refreshing token',
+        Cli::COLOR_YELLOW_DIM
+    );
+
     $client->refreshToken($client->getRefreshToken());
 
     file_put_contents($credentialsPath, $client->getAccessToken());
@@ -82,16 +72,39 @@ if ($client->isAccessTokenExpired()) {
 
 $service = new Google_Service_Gmail($client);
 
-// Print the labels in the user's account.
 $user = 'me';
+
+Cli::writeOutput(
+    'Retrieving last message',
+    Cli::COLOR_GREEN_DIM
+);
 $userMessageList = $service->users_messages->listUsersMessages(
     $user,
-    $configuration['filterList']
+    [
+        'maxResults' => 1,
+        'q' => implode(' ', $configuration['filterList']),
+        'fields' => 'messages/id',
+    ]
 );
 
 $messageList = $userMessageList->getMessages();
+
+if (empty($messageList)) {
+    Cli::writeOutput(
+        'No messages found' . String::newLine(2),
+        Cli::COLOR_YELLOW_BOLD
+    );
+
+    exit;
+}
+
 /** @var Google_Service_Gmail_Message $message */
 $messageReference = array_shift($messageList);
+
+Cli::writeOutput(
+    'Fetching message content',
+    Cli::COLOR_GREEN_DIM
+);
 $message = $service->users_messages->get($user, $messageReference->getId());
 /** @var Google_Service_Gmail_MessagePart $messagePart */
 $messagePart = $message->getPayload();
@@ -129,7 +142,7 @@ foreach ($messagePart->getParts() as $attachment) {
 
         $headLines = explode(
             PHP_EOL,
-            specialDecode(
+            String::specialGmailMessageAttachmentDecode(
                 $body->getData()
             )
         );
@@ -138,9 +151,18 @@ foreach ($messagePart->getParts() as $attachment) {
 }
 
 if (null === $attachmentId) {
-    exit('no attachment found');
+    Cli::writeOutput(
+        'No message attachment found' . String::newLine(2),
+        Cli::COLOR_RED_BOLD
+    );
+
+    exit;
 }
 
+Cli::writeOutput(
+    'Fetching message attachment',
+    Cli::COLOR_GREEN_DIM
+);
 /** @var Google_Service_Gmail_MessagePartBody $attachment */
 $attachment = $service->users_messages_attachments->get($user, $message->getId(), $attachmentId);
 $file = $configuration['sheetFile'];
@@ -152,11 +174,15 @@ if (!is_dir($filePath)) {
 
 file_put_contents(
     $file,
-    specialDecode(
+    String::specialGmailMessageAttachmentDecode(
         $attachment->getData()
     )
 );
 
+Cli::writeOutput(
+    'Parsing sheet',
+    Cli::COLOR_GREEN_DIM
+);
 $reader = ReaderFactory::create(Type::XLSX);
 $reader->open($file);
 
@@ -173,7 +199,7 @@ foreach ($reader->getSheetIterator() as $sheet) {
             continue;
         }
 
-        foreach ($configuration['team']() as $member) {
+        foreach ($configuration['team'] as $member) {
             if ($row[2] !== $member) {
                 continue;
             }
@@ -198,6 +224,10 @@ foreach ($reader->getSheetIterator() as $sheet) {
 
 $reader->close();
 
+Cli::writeOutput(
+    'Notifying Slack team' . String::newLine(),
+    Cli::COLOR_GREEN_DIM
+);
 // Instantiate with defaults, so all messages created
 // will be sent from 'Cyril' and to the #accounting channel
 // by default. Any names like @regan or #channel will also be linked.
@@ -221,8 +251,32 @@ $client
     ->send($headLine)
 ;
 
-var_dump(
-    //$date,
-    $headLine,
-    $team
+if ($configuration['markAsDone']) {
+    $modify = new Google_Service_Gmail_ModifyMessageRequest();
+    $modify->setRemoveLabelIds(['INBOX']);
+
+    $service->users_messages->modify($user, $message->getId(), $modify);
+
+    Cli::writeOutput(
+        'Message marked as *done*' . String::newLine(),
+        Cli::COLOR_YELLOW_DIM
+    );
+}
+
+if ($configuration['removeMessage']) {
+    $service->users_messages->trash($user, $message->getId());
+
+    Cli::writeOutput(
+        'Message moved to trash!' . String::newLine(),
+        Cli::COLOR_YELLOW_DIM
+    );
+}
+
+Cli::writeOutput(
+    $headLine . String::newLine(),
+    Cli::COLOR_GREEN_BOLD
+);
+Cli::writeOutput(
+    $teamFallback . String::newLine(),
+    Cli::COLOR_GREEN
 );

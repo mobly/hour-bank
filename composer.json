@@ -2,12 +2,6 @@
     "name": "mobly/hour-bank",
     "description": "Parses hour bank e-mail and post on slack to a development team",
     "type": "project",
-    "require": {
-        "php": ">=5.4.0",
-        "google/apiclient": "1.*",
-        "box/spout": "~2.0",
-        "maknz/slack": "~1.0"
-    },
     "license": "MIT",
     "authors": [
         {
@@ -15,5 +9,12 @@
             "email": "github@bycosta.com"
         }
     ],
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "google/apiclient": "1.*",
+        "box/spout": "~2.0",
+        "maknz/slack": "~1.0",
+        "mobly/simple-helpers": "~1.0"
+    }
 }

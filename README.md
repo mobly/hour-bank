@@ -31,6 +31,12 @@ Parses hour bank e-mail and post on slack to a development team
 > * It shoud look like this (as defined in the application.php): `./data/credential/client_secret.json`
 > * The credential JSON file should never be committed with your source code, and should be stored securely.
 
+## Setup
+
+```bash
+composer dump-autoload -o
+```
+
 ## Run
 
 ```bash
