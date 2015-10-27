@@ -39,8 +39,20 @@ composer dump-autoload -o
 
 ## Run
 
+#### Balance
+
+Generate balance report
+
 ```bash
-php src/index.php
+php src/balance.php
+```
+
+#### Log
+
+Manage time logging
+
+```bash
+php src/log.php
 ```
 
 [developer console]: https://console.developers.google.com
