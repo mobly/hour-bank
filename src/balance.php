@@ -5,23 +5,16 @@ use Box\Spout\Common\Type;
 use Box\Spout\Reader\XLSX\Sheet;
 use Maknz\Slack\Message;
 use Maknz\Slack\Client;
-use SimpleHelpers\ArrayHelper;
 use SimpleHelpers\Cli;
 use SimpleHelpers\String;
 
-$basePath = realpath(dirname(__FILE__) . '/../');
+/**
+ * @author Caio Costa <caio.costa@mobly.com.br>
+ * @since 09/10/2015
+ * @version 27/10/2015
+ */
 
-require($basePath . '/vendor/autoload.php');
-
-$localConfigurationFile = $basePath . '/configuration/local.php';
-if (!file_exists($localConfigurationFile)) {
-    exit('Please copy the local.php.template to local.php and configure with your data');
-}
-
-$configuration = ArrayHelper::configuration([
-    $basePath . '/configuration/application.php',
-    $localConfigurationFile,
-]);
+require('common.php');
 
 $client = new Google_Client();
 $client->setApplicationName($configuration['name']);

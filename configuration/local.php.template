@@ -1,6 +1,7 @@
 <?php
 
-$local = require_once('/Users/caio/Company/Mobly/Project/mobly/tools/dev/configuration/local.php');
+//$local = require_once('/path/to/bob-alice/tools/dev/configuration/local.php');
+$general = require_once('/path/to/bob-alice/tools/dev/configuration/general.php');
 
 return [
     /**
@@ -27,6 +28,13 @@ return [
      * @see https://[your team].slack.com/services/new/incoming-webhook
      */
     'slackEndpoint' => $local['slack']['endpoint'],
+
+    /**
+     * Jira task URL
+     *
+     * Ex.: 'https://moblybr.atlassian.net/browse/MEBLO-'
+     */
+    'jiraEndpoint' => $general['jira']['host'] . $general['jira']['endpoint']['meblo'],
 
     /**
      * Google Gmail Api filter for user messages list
