@@ -11,10 +11,13 @@ use SimpleHelpers\String;
 /**
  * @author Caio Costa <caio.costa@mobly.com.br>
  * @since 09/10/2015
- * @version 27/10/2015
+ * @version 03/11/2015
  */
 
 require('common.php');
+
+$optionList = getopt('', ['dry-run::']);
+$dryRun = isset($optionList['dry-run']);
 
 $client = new Google_Client();
 $client->setApplicationName($configuration['name']);
@@ -200,7 +203,7 @@ foreach ($reader->getSheetIterator() as $sheet) {
             $zero = new DateTime('@0');
             $time = $zero->diff(
                 // @see https://support.microsoft.com/en-us/kb/190633
-                new DateTime('@' . ($row[6] * 24 * 60 * 60))
+                new DateTime('@' . number_format($row[6] * 24 * 60 * 60, 6, '.', ''))
             );
 
             $hours = $time->format('%hh%I');
@@ -217,38 +220,41 @@ foreach ($reader->getSheetIterator() as $sheet) {
 
 $reader->close();
 
-Cli::writeOutput(
-    'Notifying Slack team' . String::newLine(),
-    Cli::COLOR_GREEN_DIM
-);
-// Instantiate with defaults, so all messages created
-// will be sent from 'Cyril' and to the #accounting channel
-// by default. Any names like @regan or #channel will also be linked.
-$client = new Client(
-    $configuration['slackEndpoint'],
-    [
-        'username' => 'HourBank',
-        'channel' => $configuration['channel'],
-        'icon' => ':clock4:',
-        'markdown_in_attachments' => ['fields'],
-    ]
-);
+if (!empty($configuration['slackEndpoint']) && !empty($configuration['channel'])) {
+    Cli::writeOutput(
+        'Notifying Slack team' . String::newLine(),
+        Cli::COLOR_GREEN_DIM
+    );
 
-/** @var $client Message */
-$client
-    ->attach([
-        'fallback' => $teamFallback,
-        'color' => 'bad',
-        'fields' => $team
-    ])
-    ->send($headLine)
-;
+    // Instantiate with defaults, so all messages created
+    // will be sent from 'Cyril' and to the #accounting channel
+    // by default. Any names like @regan or #channel will also be linked.
+    $client = new Client(
+        $configuration['slackEndpoint'],
+        [
+            'username' => 'HourBank',
+            'channel' => $configuration['channel'],
+            'icon' => ':clock4:',
+            'markdown_in_attachments' => ['fields'],
+        ]
+    );
+
+    /** @var $client Message */
+    !$dryRun && $client
+        ->attach([
+            'fallback' => $teamFallback,
+            'color' => 'bad',
+            'fields' => $team
+        ])
+        ->send($headLine)
+    ;
+}
 
 if ($configuration['markAsDone']) {
     $modify = new Google_Service_Gmail_ModifyMessageRequest();
     $modify->setRemoveLabelIds(['INBOX']);
 
-    $service->users_messages->modify($user, $message->getId(), $modify);
+    !$dryRun && $service->users_messages->modify($user, $message->getId(), $modify);
 
     Cli::writeOutput(
         'Message marked as *done*' . String::newLine(),
@@ -256,8 +262,8 @@ if ($configuration['markAsDone']) {
     );
 }
 
-if ($configuration['removeMessage']) {
-    $service->users_messages->trash($user, $message->getId());
+if ($configuration['removeMessage'] && !$dryRun) {
+    !$dryRun && $service->users_messages->trash($user, $message->getId());
 
     Cli::writeOutput(
         'Message moved to trash!' . String::newLine(),
