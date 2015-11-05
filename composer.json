@@ -16,5 +16,8 @@
         "box/spout": "~2.0",
         "maknz/slack": "~1.0",
         "mobly/simple-helpers": "~1.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit-selenium": "dev-master"
     }
 }

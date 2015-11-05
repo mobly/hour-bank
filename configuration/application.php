@@ -7,6 +7,7 @@ return [
     'credentialPath' => $basePath . '/data/credential/token.json',
     'clientSecretPath' => $basePath . '/data/credential/client_secret.json',
     'sheetFile' => $basePath . '/data/tmp/hourBank.xlsx',
+    'hourLogFile' => $basePath . '/data/hour-log.json',
     'scopeList' => [
         Google_Service_Gmail::GMAIL_READONLY,
         Google_Service_Gmail::GMAIL_MODIFY,

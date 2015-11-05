@@ -1,0 +1,8 @@
+<phpunit bootstrap="src/common.php" colors="true">
+    <testsuites>
+        <testsuite name="Hour Log">
+            <file>src/log-form-automation.php</file>
+        </testsuite>
+    </testsuites>
+</phpunit>
+

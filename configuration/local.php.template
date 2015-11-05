@@ -5,6 +5,11 @@ $general = require_once('/path/to/bob-alice/tools/dev/configuration/general.php'
 
 return [
     /**
+     * Your e-mail address
+     */
+    'email' => 'firstName.lastName@mobly.com.br',
+
+    /**
      * List of team member's name.
      *
      * !!! It must be a closure returning an array!

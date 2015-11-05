@@ -182,7 +182,7 @@ Cli::writeOutput(
 $reader = ReaderFactory::create(Type::XLSX);
 $reader->open($file);
 
-$team = [];
+$team = $teamCli = [];
 $teamFallback = '';
 /** @var Sheet $sheet */
 foreach ($reader->getSheetIterator() as $sheet) {
@@ -211,9 +211,14 @@ foreach ($reader->getSheetIterator() as $sheet) {
 
             $team[$member] = [
                 'title' => $member,
-                'value' => '_' . $hours . '_ ' . $hourDirection
+                'value' => '_' . $hours . '_ ' . $hourDirection,
             ];
-            $teamFallback .= $member . ': ' . $hours . ' ' . $hourDirection . PHP_EOL;
+            $teamFallback .= $member . ': ' . $hours . ' ' . $hourDirection . String::newLine();
+            $teamCli[$member] = [
+                'name' => $member,
+                'hours' => $hours,
+                'hourDirection' => $hourDirection,
+            ];
         }
     }
 }
@@ -273,9 +278,14 @@ if ($configuration['removeMessage'] && !$dryRun) {
 
 Cli::writeOutput(
     $headLine . String::newLine(),
-    Cli::COLOR_GREEN_BOLD
+    Cli::COLOR_WHITE_BOLD
 );
-Cli::writeOutput(
-    $teamFallback . String::newLine(),
-    Cli::COLOR_GREEN
-);
+
+foreach ($teamCli as $member => $data) {
+    Cli::writeOutput(
+        $member . ': ' . $data['hours'] . ' ' . $data['hourDirection'],
+        $data['hourDirection'] == 'positivas' ? Cli::COLOR_GREEN : Cli::COLOR_RED
+    );
+}
+
+Cli::writeOutput(String::newLine());

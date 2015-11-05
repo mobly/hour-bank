@@ -35,7 +35,7 @@ $help = '
  * Ex.:
  *      $ php src/log.php 1111 2h15
  *      $ php src/log.php 1111 2h15 improved feature z
- *      $ php src/log.php 1111 31-12-2015 2h15 improved feature z
+ *      $ php src/log.php 1111 31/12 2h15 improved feature z
  *
  * ####
  *
@@ -143,9 +143,20 @@ switch ($command)
     case 'status':
         $total = new DateTime("@0");
         foreach ((array) $data[$date] as $key => $entryList) {
-            Cli::writeOutput($linkPrefix . $key);
-
+            $form = '';
+            $outputList = [
+                [
+                    'message' => $linkPrefix . $key,
+                    'color' => Cli::COLOR_WHITE,
+                ]
+            ];
             foreach ($entryList as $index => $entry) {
+                if (isset($entry['form'])) {
+                    $form = $entry['form'] . String::newLine();
+
+                    continue;
+                }
+
                 $color = Cli::COLOR_YELLOW;
                 $running = true;
                 $end = $now;
@@ -170,12 +181,25 @@ switch ($command)
                     $message .= ' *RUNNING*';
                 }
 
-                Cli::writeOutput($message, $color);
+                $outputList[] = [
+                    'message' => $message,
+                    'color' => $color,
+                ];
 
                 $total->add($duration);
             }
 
-            Cli::writeOutput('');
+            foreach ($outputList as $output) {
+                Cli::writeOutput(
+                    $output['message'],
+                    empty($form) ? $output['color'] : Cli::COLOR_WHITE_DIM
+                );
+            }
+
+            Cli::writeOutput(
+                $form,
+                empty($form) ? Cli::COLOR_WHITE : Cli::COLOR_WHITE_DIM
+            );
         }
 
         $dayTotal = new DateTime('@' . (8 * 60 * 60));
@@ -204,6 +228,7 @@ switch ($command)
                 continue;
             }
 
+            $commentList = [];
             $total = new DateTime("@0");
             foreach ($entryList as $index => $entry) {
                 if (empty($entry['stop'])) {
@@ -216,18 +241,20 @@ switch ($command)
                             DateTime::createFromFormat($timeFormat, $entry['stop'])
                         )
                 );
+
+                if (!empty($entry['comment'])) {
+                    $comment = str_replace('\n', String::newLine(), $entry['comment']);
+
+                    $commentList[$comment] = $comment;
+                }
             }
 
             $message = $key . ' '
                 . number_format(
                     (int) $total->format('H') + ((int) $total->format('i') / 60),
                     2
-                )
+                ) . String::newLine() . implode(String::newLine(), $commentList);
             ;
-
-            if (!empty($entry['comment'])) {
-                $message .= String::newLine() . str_replace('\n', String::newLine(), $entry['comment']);
-            }
 
             Cli::writeOutput($message . String::newLine());
         }
