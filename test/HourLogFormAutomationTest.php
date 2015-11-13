@@ -6,8 +6,6 @@ use SimpleHelpers\String;
 
 class HourLogFormAutomationTest extends Selenium
 {
-    const URL = 'https://docs.google.com/a/mobly.com.br/forms/d/11CFIHRL33Pw-vMLbPubP5NUZe_eGhI-equ-EhB9HjIg/viewform';
-
     /**
      * @var array
      */
@@ -34,7 +32,8 @@ class HourLogFormAutomationTest extends Selenium
     {
         global $configuration;
 
-        $this->setBrowserUrl(self::URL);
+        $this->setBrowserUrl($configuration['googleFormUrl']);
+
         $this->configuration = $configuration;
 
         // workaround to be able to see the prompt text
@@ -47,13 +46,15 @@ class HourLogFormAutomationTest extends Selenium
             true
         );
 
+        Cli::writeOutput(String::newLine());
+
         // return to the original state
         ob_start();
     }
 
     public function testPersistDatabase()
     {
-        $this->url(self::URL);
+        $this->url($this->configuration['googleFormUrl']);
 
         $this->clickDisplayedElementByID('Email');
         $this->keys($this->configuration['email']);
@@ -131,7 +132,7 @@ class HourLogFormAutomationTest extends Selenium
                     'form' => $this->waitUntilShow(Selenium::BY_CLASS_NAME, 'ss-bottom-link')->attribute('href')
                 ];
 
-                $this->url(self::URL);
+                $this->url($this->configuration['googleFormUrl']);
             }
         }
 

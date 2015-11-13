@@ -57,4 +57,9 @@ return [
      * Mark message as done after processing it (removes from inbox)
      */
     //'markAsDone' => true,
+
+    /**
+     * Google Form URL
+     */
+    'googleFormUrl' => 'https://docs.google.com/a/domain.com/forms/d/{HASH}/viewform',
 ];

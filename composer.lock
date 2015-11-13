@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "66675f82874982bc1ec32afa39f3197f",
-    "content-hash": "dbb6a7018e40d5e717cfa61e6e29cb86",
+    "hash": "e9c831719c2972c800a0864253720964",
+    "content-hash": "51ad8ade1f91affa4c09f7655a029400",
     "packages": [
         {
             "name": "box/spout",
-            "version": "v2.3.0",
+            "version": "v2.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/box/spout.git",
-                "reference": "6124528161db5014216c7aa510ad889df46c269c"
+                "reference": "582da8403d22bd4f284cce8c963513819137ec58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/box/spout/zipball/6124528161db5014216c7aa510ad889df46c269c",
-                "reference": "6124528161db5014216c7aa510ad889df46c269c",
+                "url": "https://api.github.com/repos/box/spout/zipball/582da8403d22bd4f284cce8c963513819137ec58",
+                "reference": "582da8403d22bd4f284cce8c963513819137ec58",
                 "shasum": ""
             },
             "require": {
@@ -70,7 +70,50 @@
                 "write",
                 "xlsx"
             ],
-            "time": "2015-09-02 21:30:19"
+            "time": "2015-11-05 23:52:56"
+        },
+        {
+            "name": "firebase/php-jwt",
+            "version": "v3.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/firebase/php-jwt.git",
+                "reference": "fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1",
+                "reference": "fa8a06e96526eb7c0eeaa47e4f39be59d21f16e1",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Firebase\\JWT\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Neuman Vong",
+                    "email": "neuman+pear@twilio.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Anant Narayanan",
+                    "email": "anant@php.net",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
+            "homepage": "https://github.com/firebase/php-jwt",
+            "time": "2015-07-22 18:31:08"
         },
         {
             "name": "google/apiclient",
@@ -87,7 +130,12 @@
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.2.1"
+                "firebase/php-jwt": "~2.0|~3.0",
+                "google/auth": "~0.4",
+                "guzzlehttp/guzzle": "5.2.*",
+                "monolog/monolog": "^1.17",
+                "php": ">=5.4",
+                "phpseclib/phpseclib": "~2.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "3.7.*",
@@ -114,6 +162,51 @@
                 "google"
             ],
             "time": "2015-10-09 17:17:49"
+        },
+        {
+            "name": "google/auth",
+            "version": "v0.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/google/google-auth-library-php.git",
+                "reference": "b2d0e7bdcbe8ccdd0f83a7527ef23bcc202e331a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/google/google-auth-library-php/zipball/b2d0e7bdcbe8ccdd0f83a7527ef23bcc202e331a",
+                "reference": "b2d0e7bdcbe8ccdd0f83a7527ef23bcc202e331a",
+                "shasum": ""
+            },
+            "require": {
+                "firebase/php-jwt": "~2.0|~3.0",
+                "guzzlehttp/guzzle": "5.2.*",
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phplint/phplint": "0.0.1",
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ],
+                "psr-4": {
+                    "Google\\Auth\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Google Auth Library for PHP",
+            "homepage": "http://github.com/google/google-auth-library-php",
+            "keywords": [
+                "Authentication",
+                "google",
+                "oauth2"
+            ],
+            "time": "2015-11-03 23:16:35"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -325,16 +418,16 @@
         },
         {
             "name": "mobly/simple-helpers",
-            "version": "v1.2.9",
+            "version": "v1.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mobly/simple-helpers.git",
-                "reference": "62134c9f4ebb4d45a1f2088602cc34f3a16ef265"
+                "reference": "94414c5ecf221d826b1bddbbdb9ae83856529128"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mobly/simple-helpers/zipball/62134c9f4ebb4d45a1f2088602cc34f3a16ef265",
-                "reference": "62134c9f4ebb4d45a1f2088602cc34f3a16ef265",
+                "url": "https://api.github.com/repos/mobly/simple-helpers/zipball/94414c5ecf221d826b1bddbbdb9ae83856529128",
+                "reference": "94414c5ecf221d826b1bddbbdb9ae83856529128",
                 "shasum": ""
             },
             "require": {
@@ -361,7 +454,219 @@
                 }
             ],
             "description": "Set of helpers",
-            "time": "2015-11-05 19:32:41"
+            "time": "2015-11-10 23:19:26"
+        },
+        {
+            "name": "monolog/monolog",
+            "version": "1.17.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/Seldaek/monolog.git",
+                "reference": "bee7f0dc9c3e0b69a6039697533dca1e845c8c24"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/bee7f0dc9c3e0b69a6039697533dca1e845c8c24",
+                "reference": "bee7f0dc9c3e0b69a6039697533dca1e845c8c24",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0",
+                "psr/log": "~1.0"
+            },
+            "provide": {
+                "psr/log-implementation": "1.0.0"
+            },
+            "require-dev": {
+                "aws/aws-sdk-php": "^2.4.9",
+                "doctrine/couchdb": "~1.0@dev",
+                "graylog2/gelf-php": "~1.0",
+                "jakub-onderka/php-parallel-lint": "0.9",
+                "php-console/php-console": "^3.1.3",
+                "phpunit/phpunit": "~4.5",
+                "phpunit/phpunit-mock-objects": "2.3.0",
+                "raven/raven": "^0.13",
+                "ruflin/elastica": ">=0.90 <3.0",
+                "swiftmailer/swiftmailer": "~5.3",
+                "videlalvaro/php-amqplib": "~2.4"
+            },
+            "suggest": {
+                "aws/aws-sdk-php": "Allow sending log messages to AWS services like DynamoDB",
+                "doctrine/couchdb": "Allow sending log messages to a CouchDB server",
+                "ext-amqp": "Allow sending log messages to an AMQP server (1.0+ required)",
+                "ext-mongo": "Allow sending log messages to a MongoDB server",
+                "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
+                "php-console/php-console": "Allow sending log messages to Google Chrome",
+                "raven/raven": "Allow sending log messages to a Sentry server",
+                "rollbar/rollbar": "Allow sending log messages to Rollbar",
+                "ruflin/elastica": "Allow sending log messages to an Elastic Search server",
+                "videlalvaro/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.16.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Monolog\\": "src/Monolog"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jordi Boggiano",
+                    "email": "j.boggiano@seld.be",
+                    "homepage": "http://seld.be"
+                }
+            ],
+            "description": "Sends your logs to files, sockets, inboxes, databases and various web services",
+            "homepage": "http://github.com/Seldaek/monolog",
+            "keywords": [
+                "log",
+                "logging",
+                "psr-3"
+            ],
+            "time": "2015-10-14 12:51:02"
+        },
+        {
+            "name": "phpseclib/phpseclib",
+            "version": "2.0.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phpseclib/phpseclib.git",
+                "reference": "2f5dbc17118872d432aa8af6c645bfb8f8ca38ad"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phpseclib/phpseclib/zipball/2f5dbc17118872d432aa8af6c645bfb8f8ca38ad",
+                "reference": "2f5dbc17118872d432aa8af6c645bfb8f8ca38ad",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phing/phing": "~2.7",
+                "phpunit/phpunit": "~4.0",
+                "sami/sami": "~2.0",
+                "squizlabs/php_codesniffer": "~2.0"
+            },
+            "suggest": {
+                "ext-gmp": "Install the GMP (GNU Multiple Precision) extension in order to speed up arbitrary precision integer arithmetic operations.",
+                "ext-libsodium": "SSH2/SFTP can make use of some algorithms provided by the libsodium-php extension.",
+                "ext-mcrypt": "Install the Mcrypt extension in order to speed up a few other cryptographic operations.",
+                "ext-openssl": "Install the OpenSSL extension in order to speed up a wide variety of cryptographic operations."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "phpseclib\\": "phpseclib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Jim Wigginton",
+                    "email": "terrafrost@php.net",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Patrick Monnerat",
+                    "email": "pm@datasphere.ch",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Andreas Fischer",
+                    "email": "bantu@phpbb.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Hans-Jürgen Petrich",
+                    "email": "petrich@tronic-media.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Graham Campbell",
+                    "email": "graham@alt-three.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "PHP Secure Communications Library - Pure-PHP implementations of RSA, AES, SSH2, SFTP, X.509 etc.",
+            "homepage": "http://phpseclib.sourceforge.net",
+            "keywords": [
+                "BigInteger",
+                "aes",
+                "asn.1",
+                "asn1",
+                "blowfish",
+                "crypto",
+                "cryptography",
+                "encryption",
+                "rsa",
+                "security",
+                "sftp",
+                "signature",
+                "signing",
+                "ssh",
+                "twofish",
+                "x.509",
+                "x509"
+            ],
+            "time": "2015-11-10 09:23:08"
+        },
+        {
+            "name": "psr/log",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-fig/log.git",
+                "reference": "9e45edca52cc9c954680072c93e621f8b71fab26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-fig/log/zipball/9e45edca52cc9c954680072c93e621f8b71fab26",
+                "reference": "9e45edca52cc9c954680072c93e621f8b71fab26",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Psr\\Log\\": "Psr/Log/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "PHP-FIG",
+                    "homepage": "http://www.php-fig.org/"
+                }
+            ],
+            "description": "Common interface for logging libraries",
+            "keywords": [
+                "log",
+                "psr",
+                "psr-3"
+            ],
+            "time": "2015-06-02 13:48:41"
         },
         {
             "name": "react/promise",
@@ -409,6 +714,28 @@
         }
     ],
     "packages-dev": [
+        {
+            "name": "chromedriver/chromedriver-linux",
+            "version": "2.20",
+            "dist": {
+                "type": "zip",
+                "url": "http://chromedriver.storage.googleapis.com/2.20/chromedriver_linux64.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        },
+        {
+            "name": "chromedriver/chromedriver-mac",
+            "version": "2.20",
+            "dist": {
+                "type": "zip",
+                "url": "http://chromedriver.storage.googleapis.com/2.20/chromedriver_mac32.zip",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        },
         {
             "name": "doctrine/instantiator",
             "version": "dev-master",
@@ -462,51 +789,6 @@
                 "instantiate"
             ],
             "time": "2015-06-14 21:17:01"
-        },
-        {
-            "name": "firebase/php-jwt",
-            "version": "2.0.0",
-            "target-dir": "Firebase/PHP-JWT",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "ffcfd888ce1e4f2d70cac2dc9b7301038332fe57"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/ffcfd888ce1e4f2d70cac2dc9b7301038332fe57",
-                "reference": "ffcfd888ce1e4f2d70cac2dc9b7301038332fe57",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "Authentication/",
-                    "Exceptions/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause"
-            ],
-            "authors": [
-                {
-                    "name": "Neuman Vong",
-                    "email": "neuman+pear@twilio.com",
-                    "role": "Developer"
-                },
-                {
-                    "name": "Anant Narayanan",
-                    "email": "anant@php.net",
-                    "role": "Developer"
-                }
-            ],
-            "description": "A simple library to encode and decode JSON Web Tokens (JWT) in PHP. Should conform to the current spec.",
-            "homepage": "https://github.com/firebase/php-jwt",
-            "time": "2015-04-01 18:46:38"
         },
         {
             "name": "phpdocumentor/reflection-docblock",
@@ -863,12 +1145,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9f57eb4797ad108d8dde64313d3d96e24347b81a"
+                "reference": "6f9251d0910483fcbe22ee7a47ed604e43070770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9f57eb4797ad108d8dde64313d3d96e24347b81a",
-                "reference": "9f57eb4797ad108d8dde64313d3d96e24347b81a",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6f9251d0910483fcbe22ee7a47ed604e43070770",
+                "reference": "6f9251d0910483fcbe22ee7a47ed604e43070770",
                 "shasum": ""
             },
             "require": {
@@ -927,7 +1209,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2015-11-04 15:12:39"
+            "time": "2015-11-11 12:23:02"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1421,17 +1703,28 @@
             "time": "2015-06-21 13:59:46"
         },
         {
+            "name": "seleniumhq/selenium-server-standalone",
+            "version": "2.48.2",
+            "dist": {
+                "type": "file",
+                "url": "https://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "library"
+        },
+        {
             "name": "symfony/yaml",
             "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "29dee11bd37eae3de68b5113dc4b84dc8e2b786e"
+                "reference": "3f79752644a5eb87d56a8caafac072f0ecf5d278"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/29dee11bd37eae3de68b5113dc4b84dc8e2b786e",
-                "reference": "29dee11bd37eae3de68b5113dc4b84dc8e2b786e",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/3f79752644a5eb87d56a8caafac072f0ecf5d278",
+                "reference": "3f79752644a5eb87d56a8caafac072f0ecf5d278",
                 "shasum": ""
             },
             "require": {
@@ -1467,7 +1760,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-11-02 20:34:04"
+            "time": "2015-11-10 10:42:06"
         }
     ],
     "aliases": [],

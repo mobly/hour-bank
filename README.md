@@ -4,7 +4,7 @@
 
 Parses hour bank e-mail and post on slack to a development team
 
-## Setup
+## Setup (For the Balance script)
 
 #### Application Configuration Files
 
@@ -53,6 +53,14 @@ Manage time logging
 
 ```bash
 php src/log.php
+```
+
+#### Log - Persist into Google Form
+
+Call selenium tests to persist data into the Google Form
+
+```bash
+vendor/bin/phpunit
 ```
 
 [developer console]: https://console.developers.google.com

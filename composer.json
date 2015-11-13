@@ -10,6 +10,41 @@
         }
     ],
     "minimum-stability": "dev",
+    "repositories": [
+        {
+            "type": "package",
+            "package": {
+                "name": "seleniumhq/selenium-server-standalone",
+                "version": "2.48.2",
+                "dist": {
+                    "url": "https://selenium-release.storage.googleapis.com/2.48/selenium-server-standalone-2.48.2.jar",
+                    "type": "file"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "chromedriver/chromedriver-mac",
+                "version": "2.20",
+                "dist": {
+                    "url": "http://chromedriver.storage.googleapis.com/2.20/chromedriver_mac32.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "chromedriver/chromedriver-linux",
+                "version": "2.20",
+                "dist": {
+                    "url": "http://chromedriver.storage.googleapis.com/2.20/chromedriver_linux64.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    ],
     "require": {
         "php": ">=5.4.0",
         "google/apiclient": "1.*",
@@ -18,6 +53,9 @@
         "mobly/simple-helpers": "~1.0"
     },
     "require-dev": {
-        "phpunit/phpunit-selenium": "dev-master"
+        "phpunit/phpunit-selenium": "dev-master",
+        "seleniumhq/selenium-server-standalone": "2.48.2",
+        "chromedriver/chromedriver-mac": "2.20",
+        "chromedriver/chromedriver-linux": "2.20"
     }
 }

@@ -1,7 +1,7 @@
-<phpunit bootstrap="src/common.php" colors="true">
+<phpunit bootstrap="test/bootstrap.php" colors="true">
     <testsuites>
-        <testsuite name="Hour Log">
-            <file>src/log-form-automation.php</file>
+        <testsuite name="Hour Log Form Automation">
+            <directory>test</directory>
         </testsuite>
     </testsuites>
 </phpunit>
