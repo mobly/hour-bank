@@ -200,14 +200,8 @@ foreach ($reader->getSheetIterator() as $sheet) {
                 continue;
             }
 
-            $zero = new DateTime('@0');
-            $time = $zero->diff(
-                // @see https://support.microsoft.com/en-us/kb/190633
-                new DateTime('@' . number_format($row[6] * 24 * 60 * 60, 6, '.', ''))
-            );
-
-            $hours = $time->format('%hh%I');
-            $hourDirection =  strtolower($row[7]);
+            $hours = $row[4]->diff($row[5])->format('%hh%I');
+            $hourDirection = strtolower($row[7]);
 
             $team[$member] = [
                 'title' => $member,
