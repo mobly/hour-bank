@@ -334,7 +334,7 @@ switch ($command)
         break;
 
     case 'delete':
-        $key = $optionList['edit'];
+        $key = $optionList['delete'];
 
         if (!String::validateNumber($key)) {
             Cli::writeOutput(

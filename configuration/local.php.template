@@ -1,7 +1,7 @@
 <?php
 
 //$local = require_once('/path/to/bob-alice/tools/dev/configuration/local.php');
-$general = require_once('/path/to/bob-alice/tools/dev/configuration/general.php');
+//$general = require_once('/path/to/bob-alice/tools/dev/configuration/general.php');
 
 return [
     /**
@@ -16,14 +16,16 @@ return [
      *
      * Ex: ['Caio Costa', 'Daniel Costa']
      */
-    'team' => $local['team'],
+    //'team' => $local['team'],
+    'team' => ['Member 1', 'Member 2'],
 
     /**
      * Slack channel to post the hour bank from the members of the team
      *
      * Ex.: '#general'
      */
-    'channel' => $local['slack']['teamChannel'],
+    //'channel' => $local['slack']['teamChannel'],
+    'channel' => '#team-channel',
 
     /**
      * Slack Incoming WebHook URL
@@ -32,14 +34,16 @@ return [
      *
      * @see https://[your team].slack.com/services/new/incoming-webhook
      */
-    'slackEndpoint' => $local['slack']['endpoint'],
+    //'slackEndpoint' => $local['slack']['endpoint'],
+    'slackEndpoint' => 'https://hooks.slack.com/services/qwe/asd/zxc',
 
     /**
      * Jira task URL
      *
      * Ex.: 'https://moblybr.atlassian.net/browse/MEBLO-'
      */
-    'jiraEndpoint' => $general['jira']['host'] . $general['jira']['endpoint']['meblo'],
+    //'jiraEndpoint' => $general['jira']['host'] . $general['jira']['endpoint']['meblo'],
+    'jiraEndpoint' => 'https://moblybr.atlassian.net/browse/MEBLO-',
 
     /**
      * Google Gmail Api filter for user messages list
@@ -60,6 +64,8 @@ return [
 
     /**
      * Google Form URL
+     *
+     * Ex.: 'https://docs.google.com/a/domain.com/forms/d/{HASH}/viewform'
      */
     'googleFormUrl' => 'https://docs.google.com/a/domain.com/forms/d/{HASH}/viewform',
 ];
