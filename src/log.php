@@ -6,12 +6,12 @@ use SimpleHelpers\String;
 $help = '
 /**
  * to see status:
- *      $ php src/log.php [--date={dd/mm}]
+ *      $ php src/log.php [--date={dd/mm[/yy]}]
  *
  * ####
  *
  * to see report:
- *      $ php src/log.php --report [--date={dd/mm}]
+ *      $ php src/log.php --report [--date={dd/mm[/yy]}]
  *
  * ####
  *
@@ -31,7 +31,7 @@ $help = '
  * ####
  *
  * to log a period:
- *      $ php src/log.php {MEBLO #} [{dd/mm}] {00h00} [{message}]
+ *      $ php src/log.php {MEBLO #} [{dd/mm[/yy]}] {00h00} [{message}]
  * Ex.:
  *      $ php src/log.php 1111 2h15
  *      $ php src/log.php 1111 2h15 improved feature z
@@ -65,7 +65,7 @@ $help = '
  *
  * @author Caio Costa <caio.costa@mobly.com.br>
  * @since 14/10/2015
- * @version 27/10/2015
+ * @version 07/01/2016
  */';
 
 require('common.php');
@@ -79,7 +79,9 @@ $command = 'status';
 $file = $basePath . '/data/hour-log.json';
 $now = new DateTime();
 $dateMySQLFormat = 'Y-m-d';
-$dateFormat = 'd/m';
+$dateDayFormat = 'd';
+$dateDayMonthFormat = $dateDayFormat . '/m';
+$dateDayMonthYearFormat = $dateDayMonthFormat . '/y';
 $timeFormat = 'H\hi';
 $time = $now->format($timeFormat);
 $intervalFormat = '%Hh%I';
@@ -87,6 +89,18 @@ $data = [];
 
 $date = $now->format($dateMySQLFormat);
 if (isset($optionList['date'])) {
+    $datePartList = explode('/', $optionList['date']);
+    $dateFormat = $dateDayFormat;
+
+    switch (count($datePartList)) {
+        case 3:
+            $dateFormat = $dateDayMonthYearFormat;
+            break;
+        case 2:
+            $dateFormat = $dateDayMonthFormat;
+            break;
+    }
+
     $date = DateTime::createFromFormat($dateFormat, $optionList['date']);
 
     if (false === $date) {
@@ -379,6 +393,18 @@ switch ($command)
         $argvIndex = 2;
 
         if (isset($argv[$argvIndex])) {
+            $datePartList = explode('/', $argv[$argvIndex]);
+            $dateFormat = $dateDayFormat;
+
+            switch (count($datePartList)) {
+                case 3:
+                    $dateFormat = $dateDayMonthYearFormat;
+                    break;
+                case 2:
+                    $dateFormat = $dateDayMonthFormat;
+                    break;
+            }
+
             $possibleDate = DateTime::createFromFormat($dateFormat, $argv[$argvIndex]);
 
             if ($possibleDate instanceof DateTime) {
