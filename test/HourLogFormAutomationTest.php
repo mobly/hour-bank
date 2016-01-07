@@ -117,7 +117,9 @@ class HourLogFormAutomationTest extends Selenium
                 $this->keys(
                     number_format(
                         (int)$total->format('H') + ((int)$total->format('i') / 60),
-                        2
+                        2,
+                        ',',
+                        ''
                     )
                 );
 
