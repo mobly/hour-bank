@@ -16,7 +16,7 @@ return [
     'emailBodyLineWithHeadline' => 2,
     'sheetTabName' => 'Funcionários',
     'filterList' => [
-        'bcc' => 'bcc:me',
+        'to' => '(bcc:me OR cc:me OR to:me)',
         'attachment' => 'has:attachment',
         'inbox' => 'in:inbox',
     ],
