@@ -12,8 +12,6 @@ return [
     /**
      * List of team member's name.
      *
-     * !!! It must be a closure returning an array!
-     *
      * Ex: ['Caio Costa', 'Daniel Costa']
      */
     //'team' => $local['team'],

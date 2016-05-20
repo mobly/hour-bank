@@ -142,7 +142,14 @@ foreach ($messagePart->getParts() as $attachment) {
                 $body->getData()
             )
         );
-        $headLine = $headLines[$configuration['emailBodyLineWithHeadline']];
+
+        foreach ($headLines as $line) {
+            if (false !== strpos($line, $configuration['emailBodyLineWithHeadline'])) {
+                $headLine = $line;
+
+                break;
+            }
+        }
     }
 }
 
@@ -221,7 +228,7 @@ $reader->close();
 
 if (!empty($configuration['slackEndpoint']) && !empty($configuration['channel'])) {
     Cli::writeOutput(
-        'Notifying Slack team' . String::newLine(),
+        'Notifying Slack team',
         Cli::COLOR_GREEN_DIM
     );
 
@@ -256,7 +263,7 @@ if ($configuration['markAsDone']) {
     !$dryRun && $service->users_messages->modify($user, $message->getId(), $modify);
 
     Cli::writeOutput(
-        'Message marked as *done*' . String::newLine(),
+        'Message marked as *done*',
         Cli::COLOR_YELLOW_DIM
     );
 }
@@ -265,15 +272,17 @@ if ($configuration['removeMessage'] && !$dryRun) {
     !$dryRun && $service->users_messages->trash($user, $message->getId());
 
     Cli::writeOutput(
-        'Message moved to trash!' . String::newLine(),
+        'Message moved to trash!',
         Cli::COLOR_YELLOW_DIM
     );
 }
 
-Cli::writeOutput(
-    $headLine . String::newLine(),
-    Cli::COLOR_WHITE_BOLD
-);
+if ($headLine) {
+    Cli::writeOutput(
+        String::newLine() . $headLine . String::newLine(),
+        Cli::COLOR_WHITE_BOLD
+    );
+}
 
 foreach ($teamCli as $member => $data) {
     Cli::writeOutput(

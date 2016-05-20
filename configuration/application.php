@@ -13,7 +13,7 @@ return [
         Google_Service_Gmail::GMAIL_MODIFY,
     ],
     'partialAttachmentFileName' => 'Banco de Horas',
-    'emailBodyLineWithHeadline' => 2,
+    'emailBodyLineWithHeadline' => 'banco de horas atualizado',
     'sheetTabName' => 'Funcionários',
     'filterList' => [
         'to' => '(bcc:me OR cc:me OR to:me)',
