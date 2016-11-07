@@ -107,7 +107,7 @@ class HourLogFormAutomationTest extends Selenium
                 }
 
                 $this->clickDisplayedElementByID('entry_116160053');
-                $this->keys('MEBLO-' . $key);
+                $this->keys('ST-' . $key);
 
                 $this->executeJavaScript(
                     "document.getElementById('entry_789822953').value = '" . $dateTime->format('Y-m-d') . "';"
@@ -118,7 +118,7 @@ class HourLogFormAutomationTest extends Selenium
                     number_format(
                         (int)$total->format('H') + ((int)$total->format('i') / 60),
                         2,
-                        ',',
+                        '.',
                         ''
                     )
                 );
