@@ -56,15 +56,17 @@ class HourLogFormAutomationTest extends Selenium
     {
         $this->url($this->configuration['googleFormUrl']);
 
-        $this->clickDisplayedElementByID('Email');
+        $this->clickDisplayedElementByName('identifier');
         $this->keys($this->configuration['email']);
 
-        $this->clickDisplayedElementByID('next');
+        $this->clickDisplayedElementByID('identifierNext');
+        sleep(2);
 
-        $this->clickDisplayedElementByID('Passwd');
+        $this->clickDisplayedElementByName('password');
         $this->keys($this->password);
 
-        $this->clickDisplayedElementByID('signIn');
+        $this->clickDisplayedElementByID('passwordNext');
+        sleep(10);
 
         $timeFormat = 'H\hi';
 
