@@ -2,7 +2,6 @@
 
 use SimpleHelpers\Cli;
 use SimpleHelpers\Selenium;
-use SimpleHelpers\String;
 
 class HourLogFormAutomationTest extends Selenium
 {
@@ -46,7 +45,7 @@ class HourLogFormAutomationTest extends Selenium
             true
         );
 
-        Cli::writeOutput(String::newLine());
+        Cli::writeOutput(PHP_EOL);
 
         // return to the original state
         ob_start();
@@ -102,7 +101,7 @@ class HourLogFormAutomationTest extends Selenium
                     );
 
                     if (!empty($entry['comment'])) {
-                        $comment = str_replace('\n', String::newLine(), $entry['comment']);
+                        $comment = str_replace('\n', PHP_EOL, $entry['comment']);
 
                         $commentList[$comment] = $comment;
                     }
@@ -119,14 +118,14 @@ class HourLogFormAutomationTest extends Selenium
                 $this->keys(
                     number_format(
                         (int)$total->format('H') + ((int)$total->format('i') / 60),
-                        2,
+                        1,
                         '.',
                         ''
                     )
                 );
 
                 $this->clickDisplayedElementByID('entry_1252005894');
-                $this->keys(implode(String::newLine(), $commentList));
+                $this->keys(implode(PHP_EOL, $commentList));
 
                 $this->clickDisplayedElementByID('emailReceipt');
 

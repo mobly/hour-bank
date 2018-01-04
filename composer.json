@@ -37,9 +37,9 @@
             "type": "package",
             "package": {
                 "name": "chromedriver/chromedriver-linux",
-                "version": "2.25",
+                "version": "2.32",
                 "dist": {
-                    "url": "https://chromedriver.storage.googleapis.com/2.25/chromedriver_linux64.zip",
+                    "url": "https://chromedriver.storage.googleapis.com/2.32/chromedriver_linux64.zip",
                     "type": "zip"
                 }
             }
@@ -56,6 +56,6 @@
         "phpunit/phpunit-selenium": "dev-master",
         "seleniumhq/selenium-server-standalone": "2.48.2",
         "chromedriver/chromedriver-mac": "2.20",
-        "chromedriver/chromedriver-linux": "2.25"
+        "chromedriver/chromedriver-linux": "2.32"
     }
 }

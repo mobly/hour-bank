@@ -1,7 +1,6 @@
 <?php
 
 use SimpleHelpers\Cli;
-use SimpleHelpers\String;
 
 $help = '
 /**
@@ -108,7 +107,7 @@ if (isset($optionList['date'])) {
 
         Cli::writeOutput(
             'Date error(s): ' . implode(', ', array_merge($error['warnings'], $error['errors']))
-                . String::newLine(2),
+                . PHP_EOL,
             Cli::COLOR_RED_BOLD
         );
 
@@ -122,7 +121,7 @@ if (file_exists($file)) {
     $data = json_decode(file_get_contents($file), true);
 
     if (!is_array($data)) {
-        Cli::writeOutput('Unexpected data' . String::newLine(2), Cli::COLOR_RED_BOLD);
+        Cli::writeOutput('Unexpected data' . PHP_EOL, Cli::COLOR_RED_BOLD);
 
         exit;
     }
@@ -281,7 +280,7 @@ switch ($command)
 
         if (!String::validateNumber($key)) {
             Cli::writeOutput(
-                'MEBLO must be a integer and length must be greater than 3' . String::newLine(2),
+                'MEBLO must be a integer and length must be greater than 3' . PHP_EOL,
                 Cli::COLOR_RED_BOLD
             );
 
@@ -292,7 +291,7 @@ switch ($command)
 
         if (empty($data[$date][$key][$index]['start'])) {
             Cli::writeOutput(
-                $key . ' #' . $index . ' not found!' . String::newLine(2),
+                $key . ' #' . $index . ' not found!' . PHP_EOL,
                 Cli::COLOR_RED_BOLD
             );
 
@@ -309,7 +308,7 @@ switch ($command)
 
                 Cli::writeOutput(
                     'Start error(s): ' . implode(', ', array_merge($error['warnings'], $error['errors']))
-                        . String::newLine(2),
+                        . PHP_EOL,
                     Cli::COLOR_RED_BOLD
                 );
 
@@ -327,7 +326,7 @@ switch ($command)
 
                 Cli::writeOutput(
                     'Stop error(s): ' . implode(', ', array_merge($error['warnings'], $error['errors']))
-                        . String::newLine(2),
+                        . PHP_EOL,
                     Cli::COLOR_RED_BOLD
                 );
 
@@ -342,7 +341,7 @@ switch ($command)
         }
 
         Cli::writeOutput(
-            $key . ' #' . $index . ' edited' . String::newLine(2),
+            $key . ' #' . $index . ' edited' . PHP_EOL,
             Cli::COLOR_YELLOW_BOLD
         );
         break;
@@ -352,7 +351,7 @@ switch ($command)
 
         if (!String::validateNumber($key)) {
             Cli::writeOutput(
-                'MEBLO must be a integer and length must be greater than 3' . String::newLine(2),
+                'MEBLO must be a integer and length must be greater than 3' . PHP_EOL,
                 Cli::COLOR_RED_BOLD
             );
 
@@ -363,7 +362,7 @@ switch ($command)
 
         if (!isset($data[$date][$key][$index])) {
             Cli::writeOutput(
-                $key . ' #' . $index . ' not found!' . String::newLine(2),
+                $key . ' #' . $index . ' not found!' . PHP_EOL,
                 Cli::COLOR_RED_BOLD
             );
 
@@ -373,7 +372,7 @@ switch ($command)
         unset($data[$date][$key][$index]);
 
         Cli::writeOutput(
-            $key . ' #' . $index . ' removed' . String::newLine(2),
+            $key . ' #' . $index . ' removed' . PHP_EOL,
             Cli::COLOR_RED_BOLD
         );
         break;
@@ -381,9 +380,9 @@ switch ($command)
     default:
         $key = $command;
 
-        if (!String::validateNumber($key)) {
+        if (!is_numeric($key)) {
             Cli::writeOutput(
-                'MEBLO must be a integer and length must be greater than 3' . String::newLine(2),
+                'MEBLO must be a integer and length must be greater than 3' . PHP_EOL,
                 Cli::COLOR_RED_BOLD
             );
 
@@ -433,7 +432,7 @@ switch ($command)
                 ];
 
                 Cli::writeOutput(
-                    $key . ' added' . String::newLine(2),
+                    $key . ' added' . PHP_EOL,
                     Cli::COLOR_GREEN_BOLD
                 );
 
@@ -455,7 +454,7 @@ switch ($command)
             ;
 
             Cli::writeOutput(
-                $key . ' stopped with ' . $duration . String::newLine(2),
+                $key . ' stopped with ' . $duration . PHP_EOL,
                 Cli::COLOR_GREEN_BOLD
             );
         } else {
@@ -464,7 +463,7 @@ switch ($command)
             ];
 
             Cli::writeOutput(
-                $key . ' started' . String::newLine(2),
+                $key . ' started' . PHP_EOL,
                 Cli::COLOR_GREEN_BOLD
             );
         }

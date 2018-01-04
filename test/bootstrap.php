@@ -1,7 +1,6 @@
 <?php
 
 use SimpleHelpers\Cli;
-use SimpleHelpers\String;
 
 declare(ticks = 1);
 
@@ -15,7 +14,7 @@ $showSeleniumDebug = false;
 if (file_exists($basePath . '/vendor/chromedriver/chromedriver-' . $os . '/chromedriver')) {
     $seleniumDebug = $showSeleniumDebug ? '' : ' 2>&1';
 
-    Cli::writeOutput('Starting Selenium' . String::newLine(2));
+    Cli::writeOutput('Starting Selenium' . PHP_EOL);
 
     $exec = exec(
         'java -Dwebdriver.chrome.driver=' . $basePath . '/vendor/chromedriver/chromedriver-' . $os . '/chromedriver -jar '
@@ -27,7 +26,7 @@ if (file_exists($basePath . '/vendor/chromedriver/chromedriver-' . $os . '/chrom
     sleep(2);
 
     $shutdown = function() {
-        Cli::writeOutput('Stopping Selenium' . String::newLine(2));
+        Cli::writeOutput('Stopping Selenium' . PHP_EOL);
 
         $pid = Cli::execute('ps aux | grep selenium | grep -v grep | awk \'{ print $2 }\' "$@"');
 
